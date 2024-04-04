@@ -1,21 +1,43 @@
 {
   "name": "react-contribution-viewer",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.es.js",
+  "browser": "./dist/index.umd.js",
+  "types": "./dist/index.d.ts",
   "repository": "https://github.com/woohyun1031/react-contribution-viewer.git",
   "author": "KimWooHyun <ktkwhms3@gmail.com>",
   "license": "MIT",
   "private": false,
+  "scripts": {
+    "build": "rollup -c",
+    "prepare": "husky"
+  },
   "devDependencies": {
+    "@babel/core": "^7.24.4",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/react": "^18.2.74",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-airbnb-typescript": "^18.0.0",
-    "eslint-config-prettier": "^9.1.0",
+    "@typescript-eslint/parser": "^7.5.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^8.37.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.34.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
-    "prettier": "^2.8.6"
+    "prettier": "^2.8.6",
+    "rollup": "^4.14.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "typescript": "^5.4.3"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
