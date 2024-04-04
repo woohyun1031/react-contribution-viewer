@@ -1,0 +1,37 @@
+[
+  {
+    "color": "D4C5F9",
+    "description": "Update package manager, or etc...",
+    "name": "⚙️CHORE"
+  },
+  {
+    "color": "C5DEF5",
+    "description": "Update docs",
+    "name": "📝DOCS"
+  },
+  {
+    "color": "FEF2C0",
+    "description": "A new feature!",
+    "name": "✨FEAT"
+  },
+  {
+    "color": "F9D0C4",
+    "description": "Something isn't working",
+    "name": "🐛FIX"
+  },
+  {
+    "color": "C2E0C6",
+    "description": "Not quite a feature but improves existing behavior",
+    "name": "♻️REFACTOR"
+  },
+  {
+    "color": "E99695",
+    "description": "Code style, formatting",
+    "name": "🎨STYLE"
+  },
+  {
+    "color": "66ff99",
+    "description": "test",
+    "name": "✅TEST"
+  }
+]
