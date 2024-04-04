@@ -1,2 +1,4 @@
 node_modules
-.lintstagedrc.js
+dist
+'*.d.ts'
+rollup.config.js
