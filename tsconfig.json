@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES6",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -16,7 +16,7 @@
     "emitDeclarationOnly": true,
     "removeComments": true
   },
-  "include": ["./src"],
+  "include": ["./src", "**/*.tsx", "**/*.ts", "@types", "index.ts"],
   "exclude": [
     "./dist",
     "./node_modules",
