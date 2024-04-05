@@ -1,3 +1,3 @@
-function test() {
-  return 'test';
-}
+import ContributionViewer from './components/ContributionViewer';
+
+export default ContributionViewer;
