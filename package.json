@@ -2,8 +2,6 @@
   "name": "react-contribution-viewer",
   "version": "1.0.0",
   "main": "./dist/index.js",
-  "module": "./dist/index.es.js",
-  "browser": "./dist/index.umd.js",
   "types": "./dist/index.d.ts",
   "repository": "https://github.com/woohyun1031/react-contribution-viewer.git",
   "author": "KimWooHyun <ktkwhms3@gmail.com>",

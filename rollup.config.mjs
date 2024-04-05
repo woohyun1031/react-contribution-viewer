@@ -7,7 +7,7 @@ import postcss from 'rollup-plugin-postcss';
 
 import pkg from './package.json' assert { type: 'json' };
 
-const extensions = ['js', 'jsx', 'ts', 'tsx', 'mjs'];
+const extensions = ['.js', '.jsx', '.ts', '.tsx', '.mjs'];
 
 const config = [
   {
@@ -22,18 +22,16 @@ const config = [
         preserveModules: true,
         preserveModulesRoot: 'src',
       },
-      {
-        file: pkg.module,
-        format: 'es',
-      },
-      {
-        name: pkg.name,
-        file: pkg.browser,
-        format: 'umd',
-      },
     ],
     plugins: [
-      nodeResolve({ extensions }),
+      postcss({
+        extract: false,
+        inject: (cssVariableName) =>
+          `import styleInject from 'style-inject';\nstyleInject(${cssVariableName});`,
+        modules: true,
+        sourceMap: false,
+        use: ['sass'],
+      }),
       babel({
         exclude: 'node_modules/**',
         extensions,
@@ -43,14 +41,6 @@ const config = [
       commonjs({ include: 'node_modules/**' }),
       peerDepsExternal(),
       typescript({ tsconfig: './tsconfig.json' }),
-      postcss({
-        extract: false,
-        inject: (cssVariableName) =>
-          `import styleInject from 'style-inject';\nstyleInject(${cssVariableName});`,
-        modules: true,
-        sourceMap: false,
-        use: ['sass'],
-      }),
     ],
   },
 ];
