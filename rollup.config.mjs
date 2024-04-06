@@ -12,7 +12,7 @@ const extensions = ['.js', '.jsx', '.ts', '.tsx', '.mjs'];
 const config = [
   {
     external: [/node_modules/],
-    input: './src/index.ts',
+    input: './src/index.tsx',
     output: [
       {
         dir: './dist',
