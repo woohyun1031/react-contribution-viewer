@@ -9,7 +9,8 @@
   "private": false,
   "scripts": {
     "build": "rollup -c",
-    "watch": "rollup -cw"
+    "watch": "rollup -cw",
+    "lint": "npx eslint src/* --fix"
   },
   "devDependencies": {
     "@babel/core": "^7.24.4",

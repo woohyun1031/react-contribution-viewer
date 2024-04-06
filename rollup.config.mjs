@@ -5,8 +5,6 @@ import typescript from '@rollup/plugin-typescript';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
 
-import pkg from './package.json' assert { type: 'json' };
-
 const extensions = ['.js', '.jsx', '.ts', '.tsx', '.mjs'];
 
 const config = [
@@ -21,9 +19,11 @@ const config = [
         interop: 'auto',
         preserveModules: true,
         preserveModulesRoot: 'src',
+        banner: `'use client';`,
       },
     ],
     plugins: [
+      nodeResolve({ extensions }),
       postcss({
         extract: false,
         inject: (cssVariableName) =>
