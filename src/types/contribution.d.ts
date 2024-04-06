@@ -1,6 +1,6 @@
 export type TContributionDayType = {
-  contributionCount: any;
-  date: any;
+  contributionCount: number;
+  date: string;
 };
 
 export type TContributionWeekType = {
@@ -13,17 +13,12 @@ export interface IContributionInfo {
 }
 
 export interface IUserContributionData {
-  data: {
-    user: {
-      contributionsCollection: {
-        contributionCalendar: IContributionInfo;
-      };
-    };
-  };
-  errors?: {
-    type: string;
-    path: any[];
-    locations: any[];
-    message: string;
+  contribution: {
+    date: string;
+    count: number;
+    level: number;
   }[];
+  total: {
+    lastYear: number;
+  };
 }

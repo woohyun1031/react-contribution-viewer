@@ -4,20 +4,29 @@ import {
   IContributionInfo,
   TContributionWeekType,
 } from '../types/contribution';
-import { getMonthLabels } from '../utils/contribution';
+import {
+  convertContributionsToWeeks,
+  generateEmptyContributions,
+  getMonthLabels,
+} from '../utils/contribution';
 import styles from '../styles/style.module.css';
 import { getClassName } from '../utils/common';
+import { Contribution } from '../api/fetchContribution';
 
 export interface IContributionTableProps extends IContributionInfo {
-  loading?: boolean;
   isDark?: boolean;
 }
 
 export default function ContributionTable({
-  weeks,
-  isDark = false,
-  loading = false,
-}: IContributionTableProps) {
+  contributions,
+}: {
+  contributions: Array<Contribution>;
+}) {
+  if (!contributions.length) {
+    contributions = generateEmptyContributions();
+  }
+
+  const weeks = convertContributionsToWeeks(contributions);
   const lightColor = {
     'gray-300': '#d1d5db',
     'gray-700': '#374151',
@@ -63,6 +72,7 @@ export default function ContributionTable({
             </td>
           </tr>
         </thead>
+
         <tbody>
           {label.week.map((day, index) => {
             const isOdd = Boolean(index % 2);
@@ -161,13 +171,12 @@ export default function ContributionTable({
 
   return (
     <div style={{ display: 'flex', width: '100%' }}>
-      {
-        <article className={getClassName('article', [styles.article])}>
-          <table className={getClassName('side_table', [styles.table])}>
-            {renderSideTable(weeks)}
-          </table>
-        </article>
-      }
+      <article className={getClassName('article', [styles.article])}>
+        <table className={getClassName('side_table', [styles.table])}>
+          {renderSideTable(weeks)}
+        </table>
+      </article>
+
       <article
         className={getClassName('article', [
           styles.article,

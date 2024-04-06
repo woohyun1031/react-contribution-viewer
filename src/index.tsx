@@ -1,26 +1,38 @@
 import React from 'react';
+import {
+  ContributionResponse,
+  fetchContribution,
+} from './api/fetchContribution';
 import ContributionTable from './components/ContributionTable';
-import { initialState } from './mocks/contribution';
-import { IContributionInfo } from './types/contribution';
 
 export interface IViewerWrapperProps {
   username: string;
-  githubToken: string;
 }
 
-const ContributionWrapper = () => {
+const ContributionWrapper = ({ username }: IViewerWrapperProps) => {
+  const [data, setData] = React.useState<ContributionResponse>();
   const [loading, setLoading] = React.useState(false);
-  const [contributionInfo, setContributionInfo] =
-    React.useState<IContributionInfo>(initialState);
-  const { totalContributions, weeks } = contributionInfo;
+  const [error, setError] = React.useState<Error | null>(null);
 
+  React.useEffect(() => {
+    setLoading(true);
+    fetchContribution({ username })
+      .then(setData)
+      .catch(setError)
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (error || loading) {
+    error && console.log(error);
+    return (
+      <div style={{ width: '100%' }}>
+        <ContributionTable contributions={[]} />
+      </div>
+    );
+  }
   return (
     <div style={{ width: '100%' }}>
-      <ContributionTable
-        totalContributions={totalContributions}
-        weeks={weeks}
-        loading={loading}
-      />
+      <ContributionTable contributions={data?.contributions ?? []} />
     </div>
   );
 };
