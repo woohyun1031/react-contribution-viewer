@@ -1,16 +1,12 @@
+import { DEFAULT_MONTH_LABELS } from '../constants/label';
+import { Contribution, ContributionResponse } from '../api/fetchContribution';
 import {
   IContributionInfo,
-  TContributionDayType,
   TContributionWeekType,
 } from '../types/contribution';
-import { DEFAULT_MONTH_LABELS } from '../constants/label';
 import dayjs from 'dayjs';
 
-export const getMonthLabels = (
-  weeks: {
-    contributionDays: TContributionDayType[];
-  }[],
-) => {
+export const getMonthLabels = (weeks: Array<TContributionWeekType>) => {
   return weeks
     .reduce<{ label: string; index: number }[]>((prev, cur, idx) => {
       const firstDay = dayjs(cur.contributionDays[0].date).month();
@@ -46,3 +42,42 @@ export const getMonthLabels = (
       [],
     );
 };
+
+export function generateEmptyContributions() {
+  const start = dayjs().startOf('year');
+  const end = dayjs().endOf('year');
+
+  const range = [];
+  let current = start;
+  while (!current.isAfter(end)) {
+    range.push({
+      date: current.format('YYYY-MM-DD'),
+      count: 0,
+    });
+    current = current.add(1, 'days');
+  }
+  return range;
+}
+export function convertContributionsToWeeks(
+  contributions: Array<Contribution>,
+): Array<TContributionWeekType> {
+  if (!contributions.length) return [];
+
+  const weeks = [] as TContributionWeekType[];
+
+  contributions.forEach((day) => {
+    const current = {
+      contributionCount: day.count,
+      date: day.date,
+    };
+    if (
+      weeks[weeks.length - 1] &&
+      weeks[weeks.length - 1].contributionDays.length < 7
+    ) {
+      return weeks[weeks.length - 1].contributionDays.push(current);
+    }
+    return weeks.push({ contributionDays: [current] });
+  });
+
+  return weeks;
+}
