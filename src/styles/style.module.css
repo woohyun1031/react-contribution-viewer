@@ -1,0 +1,40 @@
+.article {
+  position: relative;
+  display: block;
+  margin-top: 0.75rem;
+}
+
+.main_article {
+  width: 100%;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.table {
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0.25rem;
+}
+
+.table_row {
+  display: table-row;
+}
+
+.table_cell {
+  display: table-cell;
+}
+
+.table_day_cell {
+  text-align: center;
+  min-width: 1.75rem;
+  min-height: 1.75rem;
+  height: 1.75rem;
+}
+
+.table_sticky_cell {
+  text-align: right;
+  min-width: 2.5rem;
+  min-height: 1.75rem;
+  height: 1.75rem;
+  padding-right: 0.5rem;
+}
