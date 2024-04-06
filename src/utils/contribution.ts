@@ -1,4 +1,8 @@
-import { TContributionDayType } from '../types/contribution';
+import {
+  IContributionInfo,
+  TContributionDayType,
+  TContributionWeekType,
+} from '../types/contribution';
 import { DEFAULT_MONTH_LABELS } from '../constants/label';
 import dayjs from 'dayjs';
 
