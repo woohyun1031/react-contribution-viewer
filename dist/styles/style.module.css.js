@@ -1,7 +1,7 @@
 'use client';
 'use strict';
 
-var styleInject = require('style-inject');
+var styleInject = require('/Users/kimwoohyun/private/react-contribution-viewer/node_modules/style-inject/dist/style-inject.es.js');
 
 function _interopDefault (e) { return e && e.__esModule ? e : { default: e }; }
 

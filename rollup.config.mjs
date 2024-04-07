@@ -26,12 +26,17 @@ const config = [
       nodeResolve({ extensions }),
       postcss({
         extract: false,
-        // inject: (cssVariableName) => `${styleInject}(${cssVariableName})`,
-        inject: (cssVariableName) =>
-          `import styleInject from 'style-inject';\nstyleInject(${cssVariableName});`,
+        inject: true,
         modules: true,
         sourceMap: false,
-        use: ['sass'],
+        use: [
+          [
+            'sass',
+            {
+              incluePath: ['./src/styles', './node_modules'],
+            },
+          ],
+        ],
       }),
       babel({
         exclude: 'node_modules/**',
