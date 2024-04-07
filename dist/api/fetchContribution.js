@@ -2,10 +2,10 @@
 'use strict';
 
 var _rollupPluginBabelHelpers = require('../_virtual/_rollupPluginBabelHelpers.js');
-var tslib_es6_js = require('/Users/kimwoohyun/private/react-contribution-viewer/node_modules/tslib/tslib.es6.js');
+var tslib = require('tslib');
 
 function fetchContribution(_a) {
-  return tslib_es6_js.__awaiter(this, arguments, void 0, function (_ref) {
+  return tslib.__awaiter(this, arguments, void 0, function (_ref) {
     var username = _ref.username;
     return /*#__PURE__*/_rollupPluginBabelHelpers.regeneratorRuntime().mark(function _callee() {
       var response, responseJSON;

@@ -26,23 +26,18 @@ const config = [
       nodeResolve({ extensions }),
       postcss({
         extract: false,
-        inject: true,
+        inject: (cssVariableName) =>
+          `import styleInject from 'style-inject';\nstyleInject(${cssVariableName});`,
         modules: true,
         sourceMap: false,
-        use: [
-          [
-            'sass',
-            {
-              incluePath: ['./src/styles', './node_modules'],
-            },
-          ],
-        ],
+        use: ['sass'],
       }),
       babel({
         exclude: 'node_modules/**',
         extensions,
         include: ['src/**/*'],
         presets: ['@babel/preset-env', '@babel/preset-react'],
+        // babelHelpers: 'bundled',
       }),
       commonjs({ include: 'node_modules/**' }),
       peerDepsExternal(),

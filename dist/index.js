@@ -2,7 +2,7 @@
 'use strict';
 
 var _rollupPluginBabelHelpers = require('./_virtual/_rollupPluginBabelHelpers.js');
-var tslib_es6_js = require('/Users/kimwoohyun/private/react-contribution-viewer/node_modules/tslib/tslib.es6.js');
+var tslib = require('tslib');
 var React = require('react');
 var fetchContribution = require('./api/fetchContribution.js');
 var ContributionTable = require('./components/ContributionTable.js');
@@ -15,7 +15,7 @@ var React__default = /*#__PURE__*/_interopDefault(React);
 var ContributionWrapper = function ContributionWrapper(_a) {
   var username = _a.username,
     serverData = _a.serverData,
-    props = tslib_es6_js.__rest(_a, ["username", "serverData"]);
+    props = tslib.__rest(_a, ["username", "serverData"]);
   var _React$useState = React__default.default.useState([]),
     _React$useState2 = _rollupPluginBabelHelpers.slicedToArray(_React$useState, 2),
     contributions = _React$useState2[0],
