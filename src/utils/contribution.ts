@@ -1,9 +1,6 @@
 import { DEFAULT_MONTH_LABELS } from '../constants/label';
-import { Contribution, ContributionResponse } from '../api/fetchContribution';
-import {
-  IContributionInfo,
-  TContributionWeekType,
-} from '../types/contribution';
+import { TContribution } from '../api/fetchContribution';
+import { TContributionWeekType } from '../types/contribution';
 import dayjs from 'dayjs';
 
 export const getMonthLabels = (weeks: Array<TContributionWeekType>) => {
@@ -58,8 +55,9 @@ export function generateEmptyContributions() {
   }
   return range;
 }
+
 export function convertContributionsToWeeks(
-  contributions: Array<Contribution>,
+  contributions: Array<TContribution>,
 ): Array<TContributionWeekType> {
   if (!contributions.length) return [];
 

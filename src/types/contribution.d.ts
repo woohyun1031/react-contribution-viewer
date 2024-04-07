@@ -11,14 +11,3 @@ export interface IContributionInfo {
   totalContributions: number;
   weeks: TContributionWeekType[];
 }
-
-export interface IUserContributionData {
-  contribution: {
-    date: string;
-    count: number;
-    level: number;
-  }[];
-  total: {
-    lastYear: number;
-  };
-}

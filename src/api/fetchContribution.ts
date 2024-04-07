@@ -2,41 +2,41 @@ export interface IFetchContributionProps {
   username: string;
 }
 
-export interface Contribution {
+export type TContribution = {
   date: string;
   count: number;
   level?: 0 | 1 | 2 | 3 | 4;
-}
+};
 
-export interface ContributionResponse {
+export interface IContributionResponse {
   total: {
     [year: string]: number;
   };
-  contributions: Array<Contribution>;
+  contributions: Array<TContribution>;
 }
 
-export interface ErrorResponse {
+export interface IErrorResponse {
   error: string;
 }
 
 export async function fetchContribution({
   username,
-}: IFetchContributionProps): Promise<ContributionResponse> {
+}: IFetchContributionProps): Promise<IContributionResponse> {
   const response = await fetch(
     `https://github-contributions-api.jogruber.de/v4/${username}?y=last`,
     {
       method: 'GET',
     },
   );
-  const responseJSON: ContributionResponse | ErrorResponse =
+  const responseJSON: IContributionResponse | IErrorResponse =
     await response.json();
 
   if (!response.ok)
     throw Error(
       `Fetching GitHub contribution data for "${username}" failed: ${
-        (responseJSON as ErrorResponse).error
+        (responseJSON as IErrorResponse).error
       }`,
     );
 
-  return responseJSON as ContributionResponse;
+  return responseJSON as IContributionResponse;
 }
