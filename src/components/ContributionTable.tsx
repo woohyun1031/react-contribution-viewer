@@ -1,9 +1,6 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import label from '../constants/label';
-import {
-  IContributionInfo,
-  TContributionWeekType,
-} from '../types/contribution';
+import { TContributionWeekType } from '../types/contribution';
 import {
   convertContributionsToWeeks,
   generateEmptyContributions,
@@ -11,42 +8,35 @@ import {
 } from '../utils/contribution';
 import styles from '../styles/style.module.css';
 import { getClassName } from '../utils/common';
-import { Contribution } from '../api/fetchContribution';
+import { colorMode } from '../constants/color';
 
-export interface IContributionTableProps extends IContributionInfo {
+export interface IContributionTableProps {
+  data: Array<TContributionWeekType>;
+  total: number;
   isDark?: boolean;
+  isHeader?: boolean;
+  style?: CSSProperties;
+  renderHeader?: (value: number) => React.ReactElement;
 }
 
 export default function ContributionTable({
-  contributions,
-}: {
-  contributions: Array<Contribution>;
-}) {
-  if (!contributions.length) {
-    contributions = generateEmptyContributions();
+  data = [],
+  isDark = false,
+  isHeader = false,
+  total = 0,
+  style: styleProps = {},
+  renderHeader,
+}: IContributionTableProps) {
+  if (!data.length) {
+    const emptyContributions = generateEmptyContributions();
+    data = convertContributionsToWeeks(emptyContributions);
   }
 
-  const weeks = convertContributionsToWeeks(contributions);
-  const lightColor = {
-    'gray-300': '#d1d5db',
-    'gray-700': '#374151',
-  };
+  const colorTheme = colorMode[isDark ? 'dark' : 'light'];
 
   function renderSideTable(_weekArray: TContributionWeekType[]) {
-    const headerFont = {
-      fontSize: '0.75rem',
-      lineHeight: '1rem',
-      fontWeight: 'bold',
-    };
-
-    const cellFont = {
-      fontSize: '0.75rem',
-      lineHeight: '1rem',
-      fontWeight: 'bold',
-    };
-
-    const cellBorder = {
-      border: '1px',
+    const borderStyle = {
+      borderStyle: 'hidden',
       borderColor: 'transparent',
     };
 
@@ -64,8 +54,12 @@ export default function ContributionTable({
               ])}
             >
               <span
-                style={{ ...headerFont, visibility: 'hidden' }}
-                className={getClassName('cell', [styles.table_sticky_cell])}
+                style={{ visibility: 'hidden' }}
+                className={getClassName('cell', [
+                  styles.table_sticky_cell,
+                  styles.small_font,
+                  styles.bold_font,
+                ])}
               >
                 Day
               </span>
@@ -79,18 +73,24 @@ export default function ContributionTable({
             return (
               <tr key={day} className={getClassName('row', [styles.table_row])}>
                 <td
-                  style={{ ...cellBorder }}
+                  style={{ ...borderStyle }}
                   className={getClassName('cell', [
                     styles.table_cell,
                     styles.table_sticky_cell,
+                    styles.table_border_cell,
+                    styles.small_font,
+                    styles.bold_font,
                   ])}
                 >
                   <span
                     style={{
                       visibility: isOdd ? 'visible' : 'hidden',
                       verticalAlign: 'middle',
-                      ...cellFont,
                     }}
+                    className={getClassName('cell', [
+                      styles.small_font,
+                      styles.bold_font,
+                    ])}
                   >
                     {day}
                   </span>
@@ -104,23 +104,27 @@ export default function ContributionTable({
   }
 
   function renderTableHeader(_weekArray: TContributionWeekType[]) {
-    const headerStyle = {
-      fontSize: '0.75rem',
-      lineHeight: '1rem',
-      fontWeight: 'bold',
-    };
     return (
       <tr
         style={{ height: '30px' }}
         className={getClassName('row', [styles.table_row])}
       >
-        {getMonthLabels(_weekArray).map(({ label: text, colSpan }) => (
+        {getMonthLabels(_weekArray).map(({ label: text, colSpan }, index) => (
           <td
+            key={`${text}__${index}`}
             colSpan={colSpan}
             style={{ textAlign: 'start' }}
             className={getClassName('cell', [styles.table_cell])}
           >
-            <span style={headerStyle}>{text}</span>
+            <span
+              style={{ color: colorTheme.bold }}
+              className={getClassName('text', [
+                styles.small_font,
+                styles.bold_font,
+              ])}
+            >
+              {text}
+            </span>
           </td>
         ))}
       </tr>
@@ -128,9 +132,9 @@ export default function ContributionTable({
   }
 
   function renderTableBody(_weekArray: TContributionWeekType[]) {
-    const cellBorder = {
-      border: `1px solid ${lightColor['gray-300']}`,
-      borderRadius: '0.125rem',
+    const borderStyle = {
+      borderStyle: 'solid',
+      borderColor: colorTheme.light,
     };
 
     return label.week.map((day, index) => {
@@ -140,25 +144,24 @@ export default function ContributionTable({
             .filter((week) => !!week.contributionDays?.[index])
             .map((week) => {
               const target = week.contributionDays[index];
-              const cellFont = target.contributionCount
-                ? {
-                    fontSize: '0.875rem',
-                    lineHeight: '1.25rem',
-                  }
-                : {
-                    fontSize: '0.75rem',
-                    lineHeight: '1rem',
-                  };
+              const countAttribute = target.contributionCount
+                ? { className: styles.large_font, color: colorTheme.bold }
+                : { className: styles.small_font, color: colorTheme.light };
+
               return (
                 <td
                   key={target.date}
-                  style={{ cursor: 'pointer', ...cellBorder }}
+                  style={{ cursor: 'pointer', ...borderStyle }}
                   className={getClassName('cell', [
                     styles.table_cell,
                     styles.table_day_cell,
+                    styles.table_border_cell,
                   ])}
                 >
-                  <span style={{ ...cellFont }}>
+                  <span
+                    style={{ color: countAttribute.color }}
+                    className={getClassName('text', [countAttribute.className])}
+                  >
                     {target.contributionCount}
                   </span>
                 </td>
@@ -170,24 +173,27 @@ export default function ContributionTable({
   }
 
   return (
-    <div style={{ display: 'flex', width: '100%' }}>
-      <article className={getClassName('article', [styles.article])}>
-        <table className={getClassName('side_table', [styles.table])}>
-          {renderSideTable(weeks)}
-        </table>
-      </article>
+    <>
+      {isHeader && renderHeader ? renderHeader(total) : undefined}
+      <div style={{ display: 'flex', width: '100%', ...styleProps }}>
+        <article className={getClassName('article', [styles.article])}>
+          <table className={getClassName('side_table', [styles.table])}>
+            {renderSideTable(data)}
+          </table>
+        </article>
 
-      <article
-        className={getClassName('article', [
-          styles.article,
-          styles.main_article,
-        ])}
-      >
-        <table className={getClassName('main_table', [styles.table])}>
-          <thead>{renderTableHeader(weeks)}</thead>
-          <tbody>{renderTableBody(weeks)}</tbody>
-        </table>
-      </article>
-    </div>
+        <article
+          className={getClassName('article', [
+            styles.article,
+            styles.main_article,
+          ])}
+        >
+          <table className={getClassName('main_table', [styles.table])}>
+            <thead>{renderTableHeader(data)}</thead>
+            <tbody>{renderTableBody(data)}</tbody>
+          </table>
+        </article>
+      </div>
+    </>
   );
 }

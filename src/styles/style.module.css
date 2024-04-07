@@ -38,3 +38,22 @@
   height: 1.75rem;
   padding-right: 0.5rem;
 }
+
+.table_border_cell {
+  border: 1px;
+  border-radius: 0.125rem;
+}
+
+.small_font {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.large_font {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.bold_font {
+  font-weight: bold;
+}
