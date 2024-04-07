@@ -49,8 +49,10 @@ var ContributionWrapper = function ContributionWrapper(_a) {
         var weeks = contribution.convertContributionsToWeeks(res.contributions);
         setContributions(weeks);
         setTotal((_a = res.total['lastYear']) !== null && _a !== void 0 ? _a : 0);
-      })["catch"](setError)["finally"](function () {
-        return setLoading(false);
+        setLoading(false);
+      })["catch"](function (e) {
+        setError(e);
+        setLoading(false);
       });
     }
   }, []);

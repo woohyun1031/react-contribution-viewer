@@ -42,9 +42,12 @@ const ContributionWrapper = ({
           const weeks = convertContributionsToWeeks(res.contributions);
           setContributions(weeks);
           setTotal(res.total['lastYear'] ?? 0);
+          setLoading(false);
         })
-        .catch(setError)
-        .finally(() => setLoading(false));
+        .catch((e) => {
+          setError(e);
+          setLoading(false);
+        });
     }
   }, []);
 
