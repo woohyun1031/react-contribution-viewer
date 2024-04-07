@@ -1,3 +1,9 @@
+import styleInject from 'style-inject';
+
+const a = styleInject(` body { margin: 0; }`);
+
+export { a };
+
 export const colorMode = {
   light: {
     light: '#d1d5db',

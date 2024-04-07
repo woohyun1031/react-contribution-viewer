@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  IContributionResponse,
-  fetchContribution,
-} from './api/fetchContribution';
+import { fetchContribution } from './api/fetchContribution';
 import ContributionTable, {
   type IContributionTableProps,
 } from './components/ContributionTable';

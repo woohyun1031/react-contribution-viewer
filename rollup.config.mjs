@@ -26,6 +26,7 @@ const config = [
       nodeResolve({ extensions }),
       postcss({
         extract: false,
+        // inject: (cssVariableName) => `${styleInject}(${cssVariableName})`,
         inject: (cssVariableName) =>
           `import styleInject from 'style-inject';\nstyleInject(${cssVariableName});`,
         modules: true,

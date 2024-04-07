@@ -1,3 +1,5 @@
+declare const a: void;
+export { a };
 export declare const colorMode: {
     light: {
         light: string;

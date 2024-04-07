@@ -1274,6 +1274,11 @@
   resolved "https://registry.npmjs.org/@types/semver/-/semver-7.5.8.tgz"
   integrity sha512-I8EUhyrgfLrcTkzV3TSsGyl1tSuPrEDzr0yd5m90UgNxQkyDXULk3b6MlQqTCpZpNtWe1K0hzclnZkTcLBe2UQ==
 
+"@types/style-inject@^0.3.5":
+  version "0.3.5"
+  resolved "https://registry.yarnpkg.com/@types/style-inject/-/style-inject-0.3.5.tgz#0b14c59c167d04b3cdb633c9a8252ba240729394"
+  integrity sha512-dg4FKPXAPpoULxmwqqjGgnA4hhIYtK7zFsfSuTL5y9IjTzUFcdr7e5fpqhtRWyfVNmk5RuCjcvl2dlB7k063ow==
+
 "@typescript-eslint/eslint-plugin@^5.43.0":
   version "5.62.0"
   resolved "https://registry.npmjs.org/@typescript-eslint/eslint-plugin/-/eslint-plugin-5.62.0.tgz"
