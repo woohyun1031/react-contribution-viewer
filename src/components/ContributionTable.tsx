@@ -16,7 +16,7 @@ export interface IContributionTableProps {
   isDark?: boolean;
   isHeader?: boolean;
   style?: CSSProperties;
-  renderHeader?: (value: number) => React.ReactElement;
+  renderHeader?: (value: number) => React.ReactElement | JSX.Element;
 }
 
 export default function ContributionTable({
