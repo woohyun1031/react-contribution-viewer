@@ -12,14 +12,20 @@ import { colorMode } from '../constants/color';
 
 export interface IContributionTableProps {
   data: Array<TContributionWeekType>;
+  total: number;
   isDark?: boolean;
+  isHeader?: boolean;
   style?: CSSProperties;
+  renderHeader?: (value: number) => React.ReactElement;
 }
 
 export default function ContributionTable({
-  data,
+  data = [],
   isDark = false,
+  isHeader = false,
+  total = 0,
   style: styleProps = {},
+  renderHeader,
 }: IContributionTableProps) {
   if (!data.length) {
     const emptyContributions = generateEmptyContributions();
@@ -167,24 +173,27 @@ export default function ContributionTable({
   }
 
   return (
-    <div style={{ display: 'flex', width: '100%', ...styleProps }}>
-      <article className={getClassName('article', [styles.article])}>
-        <table className={getClassName('side_table', [styles.table])}>
-          {renderSideTable(data)}
-        </table>
-      </article>
+    <>
+      {isHeader && renderHeader ? renderHeader(total) : undefined}
+      <div style={{ display: 'flex', width: '100%', ...styleProps }}>
+        <article className={getClassName('article', [styles.article])}>
+          <table className={getClassName('side_table', [styles.table])}>
+            {renderSideTable(data)}
+          </table>
+        </article>
 
-      <article
-        className={getClassName('article', [
-          styles.article,
-          styles.main_article,
-        ])}
-      >
-        <table className={getClassName('main_table', [styles.table])}>
-          <thead>{renderTableHeader(data)}</thead>
-          <tbody>{renderTableBody(data)}</tbody>
-        </table>
-      </article>
-    </div>
+        <article
+          className={getClassName('article', [
+            styles.article,
+            styles.main_article,
+          ])}
+        >
+          <table className={getClassName('main_table', [styles.table])}>
+            <thead>{renderTableHeader(data)}</thead>
+            <tbody>{renderTableBody(data)}</tbody>
+          </table>
+        </article>
+      </div>
+    </>
   );
 }
