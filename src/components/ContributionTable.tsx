@@ -86,6 +86,7 @@ export default function ContributionTable({
                     style={{
                       visibility: isOdd ? 'visible' : 'hidden',
                       verticalAlign: 'middle',
+                      color: colorTheme.bold,
                     }}
                     className={getClassName('cell', [
                       styles.small_font,
@@ -188,7 +189,12 @@ export default function ContributionTable({
             styles.main_article,
           ])}
         >
-          <table className={getClassName('main_table', [styles.table])}>
+          <table
+            style={{
+              marginBottom: '2rem',
+            }}
+            className={getClassName('main_table', [styles.table])}
+          >
             <thead>{renderTableHeader(data)}</thead>
             <tbody>{renderTableBody(data)}</tbody>
           </table>
