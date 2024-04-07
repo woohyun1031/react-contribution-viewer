@@ -48,6 +48,7 @@ export default function ContributionTable({
             className={getClassName('row', [styles.table_row])}
           >
             <td
+              style={{ paddingBottom: '0.5rem' }}
               className={getClassName('cell', [
                 styles.table_cell,
                 styles.table_sticky_cell,
@@ -114,7 +115,7 @@ export default function ContributionTable({
           <td
             key={`${text}__${index}`}
             colSpan={colSpan}
-            style={{ textAlign: 'start' }}
+            style={{ textAlign: 'start', paddingBottom: '0.5rem' }}
             className={getClassName('cell', [styles.table_cell])}
           >
             <span
