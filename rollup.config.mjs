@@ -41,7 +41,7 @@ const config = [
       }),
       commonjs({ include: 'node_modules/**' }),
       peerDepsExternal(),
-      typescript({ tsconfig: './tsconfig.json' }),
+      typescript({ tsconfig: './tsconfig.json', sourceMap: true }),
     ],
   },
 ];
