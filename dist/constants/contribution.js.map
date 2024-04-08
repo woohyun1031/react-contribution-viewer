@@ -1,1 +1,1 @@
-{"version":3,"file":"contribution.js","sources":["../../src/constants/contribution.ts"],"sourcesContent":["export const NAMESPACE = 'react-contribution-viewer';\n"],"names":["NAMESPACE"],"mappings":";;;AAAO,IAAMA,SAAS,GAAG;;;;"}
+{"version":3,"file":"contribution.js","sources":["../../src/constants/contribution.ts"],"sourcesContent":[null],"names":["NAMESPACE"],"mappings":";;;AAAO,IAAMA,SAAS,GAAG;;;;"}
