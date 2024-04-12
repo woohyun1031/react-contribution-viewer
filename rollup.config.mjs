@@ -41,7 +41,11 @@ const config = [
         babelHelpers: 'bundled',
       }),
       peerDepsExternal(),
-      typescript({ tsconfig: './tsconfig.json', sourceMap: true }),
+      typescript({
+        tsconfig: './tsconfig.json',
+        sourceMap: true,
+        exclude: ['**/__tests__', '**/*.test.ts'],
+      }),
     ],
   },
 ];
