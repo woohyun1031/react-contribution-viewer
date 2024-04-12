@@ -1,6 +1,6 @@
 import babel from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
-import { nodeResolve } from '@rollup/plugin-node-resolve';
+import nodeResolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
@@ -32,14 +32,14 @@ const config = [
         sourceMap: false,
         use: ['sass'],
       }),
+      commonjs({ include: 'node_modules/**' }),
       babel({
         exclude: 'node_modules/**',
         extensions,
         include: ['src/**/*'],
         presets: ['@babel/preset-env', '@babel/preset-react'],
-        // babelHelpers: 'bundled',
+        babelHelpers: 'bundled',
       }),
-      commonjs({ include: 'node_modules/**' }),
       peerDepsExternal(),
       typescript({ tsconfig: './tsconfig.json', sourceMap: true }),
     ],

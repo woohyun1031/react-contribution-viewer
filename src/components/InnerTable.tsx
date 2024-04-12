@@ -19,7 +19,7 @@ export interface IContributionTableProps {
   renderHeader?: (value: number) => React.ReactElement | JSX.Element;
 }
 
-export default function ContributionTable({
+export default function InnerTable({
   data = [],
   isDark = false,
   isHeader = false,

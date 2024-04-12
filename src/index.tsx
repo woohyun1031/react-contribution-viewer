@@ -1,8 +1,8 @@
 import React from 'react';
 import { fetchContribution } from './api/fetchContribution';
-import ContributionTable, {
+import InnerTable, {
   type IContributionTableProps,
-} from './components/ContributionTable';
+} from './components/InnerTable';
 import { IContributionInfo, TContributionWeekType } from './types/contribution';
 import { convertContributionsToWeeks } from './utils/contribution';
 
@@ -12,7 +12,7 @@ export interface IViewerWrapperProps
   serverData?: IContributionInfo;
 }
 
-const ContributionWrapper = ({
+const ContributionViewer = ({
   username,
   serverData,
   ...props
@@ -51,7 +51,7 @@ const ContributionWrapper = ({
   if (error || loading) {
     error && console.error(error);
     return (
-      <ContributionTable
+      <InnerTable
         data={[]}
         total={total}
         isHeader={props.isHeader}
@@ -60,8 +60,9 @@ const ContributionWrapper = ({
       />
     );
   }
+
   return (
-    <ContributionTable
+    <InnerTable
       data={contributions}
       total={total}
       isHeader={props.isHeader}
@@ -71,4 +72,4 @@ const ContributionWrapper = ({
   );
 };
 
-export default ContributionWrapper;
+export default ContributionViewer;
